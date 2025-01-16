@@ -1,0 +1,23 @@
+# Python
+env/
+env\
+*.pyc
+__pycache__/
+
+# Django
+
+
+# React
+Frontend/book-recommendation-system-frontend/node_modules/
+Frontend/book-recommendation-system-frontend/build/
+
+Frontend\book-recommendation-system-frontend\node_modules\
+Frontend\book-recommendation-system-frontend\build\
+core\data_set\
+core/data_set/
+
+# Environment
+*.env
+.env\
+.env/
+
