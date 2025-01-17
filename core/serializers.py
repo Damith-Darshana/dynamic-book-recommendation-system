@@ -41,6 +41,23 @@ class UserRatingSerializer(serializers.ModelSerializer):
     fields='__all__'
 
 class UserProfileSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = UserProfile
-    fields='__all__'
+    username = serializers.CharField(source='user.username', read_only=True)
+    email = serializers.CharField(source='user.email', read_only=True)
+    password = serializers.CharField(write_only=True, required=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'username', 'email', 'bio', 'profile_picture', 'password']
+
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', {})
+        password = validated_data.pop('password', None)
+
+        for attr, value in user_data.items():
+            setattr(instance.user, attr, value)
+
+        if password:
+            instance.user.set_password(password)
+
+        instance.user.save()
+        return super().update(instance, validated_data)

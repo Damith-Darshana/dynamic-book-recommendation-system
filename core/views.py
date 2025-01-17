@@ -15,14 +15,14 @@ from django.http import HttpResponse
 
 
 class BookPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 12
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     pagination_class = BookPagination
     filter_backends = [SearchFilter]
-    search_fields = ['title','author','genre']
+    search_fields = ['title','author']
     
     #fetch reviews for a specific book
     @action(detail=True, methods=['get'])
@@ -50,6 +50,9 @@ class BookViewSet(viewsets.ModelViewSet):
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+    
+
+   
 
 class UserRatingViewSet(viewsets.ModelViewSet):
     queryset = UserRating.objects.all()
