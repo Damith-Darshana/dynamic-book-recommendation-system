@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../services/api';
+import Rating from './Rating';
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -38,6 +39,11 @@ const BookDetail = () => {
           <p className="text-sm text-gray-500 mb-2">Author: {book.author}</p>
           <p className="text-sm text-gray-500 mb-4">Publisher: {book.publisher}</p>
           <p className="text-gray-700">{book.description || 'No description available.'}</p>
+            {/* Rating Section */}
+         <div className="mt-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">Rate this Book</h3>
+          <Rating bookId={id} />
+        </div>
         </div>
       </div>
     </div>

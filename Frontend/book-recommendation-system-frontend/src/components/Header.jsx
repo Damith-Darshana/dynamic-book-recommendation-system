@@ -72,6 +72,7 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             {user && (
               <div className="flex items-center space-x-2">
+                
                 <img
                   src={user.profile_picture || 'https://via.placeholder.com/40'}
                   alt="Profile"

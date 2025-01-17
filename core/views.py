@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
@@ -57,6 +57,10 @@ class BookViewSet(viewsets.ModelViewSet):
 class UserRatingViewSet(viewsets.ModelViewSet):
     queryset = UserRating.objects.all()
     serializer_class = UserRatingSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class BookReviewViewSet(viewsets.ModelViewSet):
     queryset = BookReview.objects.all()
@@ -127,3 +131,4 @@ def book_recommendation(request):
 
     recommendations = recommend_books(title, books_data, cosine_sim, top_n=5)
     return JsonResponse({"recommended_books": recommendations})
+

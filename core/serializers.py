@@ -61,3 +61,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         instance.user.save()
         return super().update(instance, validated_data)
+
