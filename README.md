@@ -23,8 +23,14 @@ The Book Recommendation System is an intuitive platform designed to help readers
 - ![Screenshot_20250117_212828](https://github.com/user-attachments/assets/aa499fdf-18bc-441f-827f-ff3343594811)
 
 - **Recommendation Page**: Displays personalized book recommendations.
+- ![Screenshot_20250117_212916](https://github.com/user-attachments/assets/aac17106-a987-4bc8-a80f-8424b0450df9)
+
 - **Profile Page**: Allows users to update bios, upload profile pictures, and manage accounts.
+- ![Screenshot_20250117_213033](https://github.com/user-attachments/assets/6eb236fb-9f49-4396-ba27-e6d36f1d973d)
+
 - **Rating System**: Enables users to rate books.
+- ![Screenshot_20250117_212952](https://github.com/user-attachments/assets/1d69aca6-fa89-4745-a4ad-679ef3c0eecd)
+
 
 *Add screenshots of your app here.*
 
