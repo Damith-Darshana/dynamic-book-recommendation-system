@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -24,7 +25,6 @@ const LoginForm = () => {
       console.error('Login error:', error);
     }
   };
-  
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 border rounded-lg shadow-md">
@@ -55,6 +55,15 @@ const LoginForm = () => {
           Login
         </button>
       </form>
+      <p className="mt-4 text-center text-sm text-gray-600">
+        Don't have an account?{' '}
+        <Link
+          to="/register"
+          className="text-blue-500 hover:text-blue-700 font-medium"
+        >
+          Create one
+        </Link>
+      </p>
     </div>
   );
 };
