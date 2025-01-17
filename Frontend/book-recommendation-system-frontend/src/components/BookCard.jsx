@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom';
 
 const BookCard = ({ book }) => {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300">
+    <div className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
       <img
-        src={book.cover_image || 'https://via.placeholder.com/150'}
+        src={book.cover_image || 'https://via.placeholder.com/120x180'}
         alt={book.title}
-        className="h-60 w-full object-cover rounded-t-lg"
+        className="h-40 w-full object-cover rounded-t-lg"
       />
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800">{book.title}</h3>
-        <p className="text-sm text-gray-500">Author: {book.author}</p>
-        <p className="mt-2 text-sm text-gray-600">
-          {book.publisher ? book.publisher.slice(0, 80) : 'No publisher info available.'}
+      <div className="p-3">
+        <h3 className="text-md font-semibold text-gray-800 truncate">{book.title}</h3>
+        <p className="text-sm text-gray-500 truncate">Author: {book.author}</p>
+        <p className="mt-1 text-sm text-gray-600 truncate">
+          {book.publisher ? `Publisher: ${book.publisher}` : 'No publisher info'}
         </p>
         <Link
           to={`/book/${book.id}`}
-          className="mt-4 inline-block text-blue-600 font-medium hover:text-blue-800"
+          className="mt-3 inline-block text-sm text-blue-500 font-medium hover:text-blue-700"
         >
           View Details →
         </Link>

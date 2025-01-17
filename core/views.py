@@ -84,6 +84,7 @@ def test_email(request):
 from django.http import JsonResponse
 import pandas as pd
 import pickle
+from  rapidfuzz import process 
 import os
 from django.conf import settings
 
@@ -103,7 +104,12 @@ def recommend_books(title, books_data, cosine_sim, top_n=5):
     try:
         idx = books_data[books_data['Book-Title'].str.lower() == title].index[0]
     except IndexError:
-        return [{"error": "Book not found in dataset."}]
+        # Use fuzzy matching to find a similar title
+        similar_titles = process.extract(title, books_data['Book-Title'], limit=1)
+        if similar_titles and similar_titles[0][1] >= 75:  # Confidence threshold
+            idx = books_data[books_data['Book-Title'] == similar_titles[0][0]].index[0]
+        else:
+            return [{"error": "Book not found in dataset or no similar books available."}]
 
     # Get similarity scores
     sim_scores = list(enumerate(cosine_sim[idx]))
@@ -111,7 +117,7 @@ def recommend_books(title, books_data, cosine_sim, top_n=5):
     top_indices = [i[0] for i in sim_scores[1:top_n+1]]
     
     # Return the recommended books
-    return books_data.iloc[top_indices][['Book-Title', 'Book-Author', 'Publisher']].to_dict(orient="records")
+    return books_data.iloc[top_indices][['Book-Title', 'Book-Author', 'Publisher','Image-URL-L']].to_dict(orient="records")
 
 # API view for recommendations
 def book_recommendation(request):

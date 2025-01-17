@@ -71,42 +71,72 @@ const ProfilePage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold mb-4 text-gray-800">Profile</h1>
+      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">Your Profile</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         {success && <p className="text-green-500 mb-4">{success}</p>}
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className="mb-4">
-            <label className="block text-gray-700">Username</label>
-            <p className="text-gray-900">{profile.username}</p>
+        <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
+          {/* Profile Picture */}
+          <div className="flex flex-col items-center">
+            <img
+              src={profile.profile_picture || 'https://via.placeholder.com/150'}
+              alt="Profile"
+              className="h-32 w-32 rounded-full object-cover mb-4 border"
+            />
+            <label
+              htmlFor="profile_picture"
+              className="text-blue-500 cursor-pointer hover:underline"
+            >
+              Change Profile Picture
+            </label>
+            <input
+              id="profile_picture"
+              type="file"
+              name="profile_picture"
+              onChange={handleFileChange}
+              className="hidden"
+            />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
-            <p className="text-gray-900">{profile.email}</p>
+
+          {/* Username and Email */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-gray-700 font-medium">Username</label>
+              <p className="text-gray-900 bg-gray-100 rounded-md p-2">{profile.username}</p>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium">Email</label>
+              <p className="text-gray-900 bg-gray-100 rounded-md p-2">{profile.email}</p>
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Bio</label>
+
+          {/* Bio */}
+          <div>
+            <label className="block text-gray-700 font-medium">Bio</label>
             <textarea
               name="bio"
               value={formData.bio}
               onChange={handleChange}
               className="w-full p-2 border rounded-md"
-            />
+              rows="4"
+              placeholder="Write something about yourself..."
+            ></textarea>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Profile Picture</label>
-            <input type="file" name="profile_picture" onChange={handleFileChange} />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Password (optional)</label>
+
+          {/* Password */}
+          <div>
+            <label className="block text-gray-700 font-medium">New Password</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               className="w-full p-2 border rounded-md"
+              placeholder="Enter a new password (optional)"
             />
           </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
